@@ -1,0 +1,37 @@
+@startuml
+left to right direction
+skinparam actorStyle Hollow
+
+
+actor Admin
+
+
+  Admin -[#blue]-> (Registrarme)
+  Admin -[#blue]-> (Iniciar sesión)
+  Admin -[#blue]-> (Recordar contraseña)
+  Admin -[#blue]-> (Actualizar mi perfil)
+  Admin -[#blue]-> (Cerrar sesión)
+  Admin -[#blue]-> (Cerrar cuenta)
+  
+  Admin -[#blue]-> (Registrar conductor)
+  Admin -[#blue]-> (Actualizar conductor)
+  Admin -[#blue]-> (Eliminar conductor)
+  Admin -[#blue]-> (Consultar disponibilidad de conductor)
+
+  Admin -[#blue]-> (Registrar asistente)
+  Admin -[#blue]-> (Actualizar asistente)
+  Admin -[#blue]-> (Eliminar asistente)
+  Admin -[#blue]-> (Consultar disponibilidad de asistente)
+
+  Admin -[#blue]-> (Registrar apoderado)
+  Admin -[#blue]-> (Actualizar apoderado)
+  Admin -[#blue]-> (Eliminar apoderado)
+
+  Admin -[#blue]-> (Generar contrato)
+  Admin -[#blue]-> (Consultar contratos)
+  Admin -[#blue]-> (Cancelar contrato)
+
+  Admin -[#blue]-> (Registrar evento)
+  Admin -[#blue]-> (Consultar eventos)
+}
+@enduml

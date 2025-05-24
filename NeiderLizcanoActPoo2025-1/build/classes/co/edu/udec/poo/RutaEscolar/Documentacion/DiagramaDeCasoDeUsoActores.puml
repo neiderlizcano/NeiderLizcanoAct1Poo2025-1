@@ -1,0 +1,21 @@
+@startuml
+left to right direction
+skinparam actorStyle Hollow
+
+
+  Admin --> (Iniciar sesión)
+  Admin --> (Cerrar sesión)
+  
+  Admin --> (Gestionar conductores)
+  Admin --> (Gestionar asistentes)
+  Admin --> (Gestionar apoderados)
+  
+  Admin --> (Gestionar contratos)
+  Admin --> (Gestionar recorridos)
+  Admin --> (Gestionar minibuses)
+  
+  Admin --> (Registrar evento)
+  Admin --> (Consultar eventos)
+  Admin --> (Consultar pagos)
+
+@enduml

@@ -1,0 +1,55 @@
+@startuml
+left to right direction
+
+skinparam actorStyle Hollow
+skinparam packageStyle rectangle
+
+
+
+
+Admin -[#blue]-> (Registrar usuario)
+Admin -[#blue]-> (Consultar contrato)
+Admin -[#blue]-> (Generar contrato)
+
+
+'/actor Apoderado
+
+'package "Seguridad"  {
+
+'package "Seguridad" {
+  'ApoderadoUser -[#blue]-> (Registrarme)
+  'ApoderadoUser <-[#blue]- (Iniciar sesión)
+  'ApoderadoUser -[#blue]-> (Actualizar mi perfil)
+  'ApoderadoUser -[#blue]-> (Cerrar sesión)
+  'ApoderadoUser -[#blue]-> (Cerrar cuenta)
+  'ApoderadoUser <-[#blue]- (Recordar contraseña)
+'}
+'}
+
+'package "Contratos"  {
+'}
+
+'package "Consultas"  {
+'}
+
+'package "Pago"  {
+'}
+
+'package "Incidentes"  {
+'}
+
+'package "Evaluación"  {
+'}
+
+
+
+
+' Conexión del actor Apoderado con cada paquete
+'Apoderado --> Seguridad
+'Apoderado --> Contratos
+'Apoderado --> Consultas
+'Apoderado --> Pago
+'Apoderado --> Incidentes
+'Apoderado --> "Evaluación"
+
+@enduml

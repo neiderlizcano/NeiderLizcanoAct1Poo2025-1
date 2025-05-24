@@ -1,0 +1,211 @@
+@startuml
+
+class Persona {
+ 
+  - int id
+  - String nombre
+  - String apellido
+  - String celular
+  - String email
+}
+
+class Empleado {
+  <<abstract>>
+   - JornadaTurno jornadaTurno
+}
+
+
+class Empresa {
+  - String nombre
+  - String nit
+  - String telefono
+  - String email
+  - String direccion
+  - List<Minibus> minibuses
+  - List<Conductor> conductores
+  - List<Asistente> asistentes
+  - List<Contrato> contratos
+  - List<Recorrido> recorridos
+  - List<Apoderado> apoderados
+  - List <Nino> ninos
+}
+class Minibus {
+   - int id;
+   - String placa;
+   - double kilometrajeActual;
+   - int capacidadMaxima = 10;
+   - private EstadoMinibus estado;
+   - private int cuposOcupados = 0; // Variable contadora
+   - private ArrayList <String> cupos;
+   - private double KilometrajeLimiteMantenimiento = 10000;
+
+}
+
+class Conductor {
+  - EstadoConductor estado
+  - List<Evento> eventos
+  - List<Recorrido> recorridos
+}
+
+class Asistente {
+  - EstadoAsistente estado
+  - List<Recorrido> recorridos
+}
+
+
+class Nino {
+  - String direccionCasa
+  - String direccionColegio
+  - String colegio
+  - LocalTime horaRecogida
+  - LocalTime horaRegreso
+  - Apoderado apoderado
+}
+
+class Apoderado {
+  - List<Nino> ninos
+  - List<Contrato> contratos
+  - List<Pago> pagos
+  }
+
+class Contrato {
+  - Int id
+  - Date fechaInicio
+  - Date fechaTermino
+  - ModalidadServicio modalidad
+  - double descuento
+  - double tarifaBase
+  - int cantidadNinos;
+  - EstadoContrato estado
+  - List<Nino> ninos
+  - List<Pago> pagos
+}
+note right of Contrato
+  1 contrato puede incluir varios niños
+  Lista de pagos Para consultar historial de pagos
+end note
+
+class Recorrido {
+    - int id;
+    - Date fechaRecorrido;
+    - String barrio;
+    - String colegio;
+    - String jornada;
+    - double distanciaKm;
+    - Minibus miniBusAsignado;
+    - Conductor conductorAsignado;
+    - Asistente asistenteAsignado;
+    - EstadoRecorrido estado;
+    - List<Nino> ninos;
+  }
+
+class Registro {
+  - LocalDateTime horaLlegadaColegio
+  - LocalDateTime horaRetornoParqueadero
+  - double kilometrajeInicio
+  - double kilometrajeFin
+}
+
+class Evento {
+  - LocalDateTime fechaHora
+  - String tipo
+  - String descripcion
+  - String gravedad
+  - String ubicacion
+  - boolean afectaRecorrido
+  - String recorridoId
+}
+
+class Pago {
+  - Int id
+  - double monto
+  - Date fecha
+  - EstadoPago estado
+}
+
+note right of Pago
+ Esta clase solo aloja los datos de pagos que realizan 
+Pero no es para ejecutar.
+end note
+
+
+' Relaciones de herencia
+Persona <|-- Empleado
+Empleado <|-- Conductor
+Empleado <|-- Asistente
+Persona <|-- Apoderado
+Persona <|-- Nino
+
+' Relaciones
+Apoderado "1" -- "*" Nino : "Tiene"
+Apoderado "1" -- "*" Contrato : "Tiene"
+Apoderado "1" -- "*" Pago : "Realiza"
+
+Apoderado "*" -- "1" Empresa : "Contrata"
+Nino "*" -- "1" Empresa : "Transporta"
+Conductor "*" -- "1" Empresa : "Trabaja"
+Asistente "*" -- "1" Empresa : "Trabaja"
+
+Minibus "1" -- "*" Recorrido : "Realiza"
+Minibus "1" -- "*" Registro : "Genera"
+Minibus "1" -- "*" Nino : "Transporta"
+
+Conductor "1" -- "*" Evento : "Reporta"
+
+Contrato "1" -- "*" Pago : "Genera"
+Contrato "1" -- "1..*" Nino : "Incluye"
+
+Recorrido "1" -- "*" Nino : "Incluye"
+
+Empresa "1" -- "*" Minibus : "Posee"
+Empresa "1" -- "*" Recorrido : "Organiza"
+Empresa "1" -- "*" Apoderado : "Gestiona"
+Empresa "1" -- "*" Nino : "Gestiona"
+
+' Enumeraciones
+enum EstadoMinibus {
+  DISPONIBLE
+  EN_MANTENIMIENTO
+  OCUPADO
+  FUERA_DE_SERVICIO
+}
+
+enum EstadoConductor {
+  ACTIVO
+  INACTIVO
+  EN_REPOSO
+}
+
+enum EstadoAsistente {
+  ACTIVO
+  INACTIVO
+}
+
+enum EstadoContrato {
+  ACTIVO
+  CANCELADO
+  VENCIDO
+}
+
+enum EstadoRecorrido {
+  EN_PROGRESO
+  FINALIZADO
+  CANCELADO
+}
+
+enum ModalidadServicio {
+  MANANA
+  MEDIODIA
+  TARDE
+  MANANA_MEDIODIA
+  MANANA_TARDE
+  MEDIODIA_TARDE
+}
+
+
+enum EstadoPago {
+  PENDIENTE
+  PAGADO
+  ATRASADO
+}
+@enduml
